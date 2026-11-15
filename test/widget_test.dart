@@ -1,30 +1,15 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sayangin_mobile/impact/models.dart';
 
-import 'package:sayangin_mobile/main.dart';
-
+// Memastikan JSON dari /dampak/api/tantangan/ bisa dibaca model Challenge
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
-
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  test('Challenge.fromJson', () {
+    final challenge = Challenge.fromJson({
+      'id': 1, 'title': 'Donasi 3 barang', 'kind': 'donasi', 'kind_label': 'Donasi diterima lembaga',
+      'target': 3, 'start_date': '2026-11-16', 'end_date': '2026-11-23', 'is_running': true,
+      'done': 2, 'percent': 67, 'remaining': 1,
+    });
+    expect(challenge.remaining, 1);
+    expect(challenge.endDate, DateTime(2026, 11, 23));
   });
 }
