@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:sayangin_mobile/donation/screens/donation_page.dart';
 
+// SEMENTARA: aplikasi langsung membuka Modul Dampak sampai kerangka & navigasi kelompok masuk ke main.
+// Yang perlu dipertahankan saat digabung: Provider<CookieRequest> di atas MaterialApp.
 void main() {
   runApp(const MyApp());
 }
