@@ -70,7 +70,30 @@ Alamat dasar: `https://muhammad-ghazi51-sayang-in.pws.cs.ui.ac.id`
 | DELETE | `/dampak/api/tantangan/<id>/` | Menghapus tantangan | Pemilik tantangan |
 
 ### Autentikasi dan Profil Pengguna (Ghazi)
-*Menyusul.*
+| Method | Endpoint | Fungsi | Akses |
+|:---|:---|:---|:---|
+| POST | `/auth/login/` | Login sesi mobile (`pbp_django_auth` / `CookieRequest.login`) | Semua |
+| POST | `/auth/register/` | Registrasi akun baru (`pbp_django_auth`) | Semua |
+| POST | `/auth/logout/` | Logout sesi mobile (`pbp_django_auth` / `CookieRequest.logout`) | Semua |
+| POST | `/api/auth/login/` | Login akun (email/username & kata sandi) beserta ringkasan user dan `next_step` | Semua |
+| POST | `/api/auth/register/` | Registrasi akun personal atau lembaga mitra | Semua |
+| POST | `/api/auth/logout/` | Mengakhiri sesi login pengguna | Pengguna login |
+| GET | `/api/auth/me/` | Mengecek status sesi pengguna aktif beserta profil dan alamat utama / data lembaga | Pengguna login |
+| POST | `/api/auth/google/` | Login, registrasi, atau menautkan akun Google (`id_token`) | Semua / Pengguna login |
+| GET | `/api/profile/` | Mengambil data profil, ringkasan dampak, preferensi, dan daftar alamat | Pengguna login |
+| POST / PUT / PATCH | `/api/profile/update/` | Memperbarui data diri akun personal (nama lengkap, email, nomor telepon) | Akun personal |
+| POST / PUT / PATCH | `/api/profile/preferences/` | Memperbarui preferensi ukuran, kategori, pengingat, dan newsletter | Akun personal |
+| GET | `/api/addresses/?label=&q=` | Daftar alamat pengiriman pengguna, bisa difilter label dan kata kunci | Akun personal |
+| POST | `/api/addresses/` | Menambahkan alamat pengiriman baru (tersedia juga di `/api/addresses/add/`) | Akun personal |
+| GET / PUT / PATCH / DELETE | `/api/addresses/<id>/` | Detail, ubah (`/edit/`), atau hapus (`/delete/`) alamat pengiriman | Pemilik alamat (akun personal) |
+| POST | `/api/addresses/<id>/set-primary/` | Menjadikan alamat terpilih sebagai alamat utama | Pemilik alamat (akun personal) |
+| GET | `/api/rajaongkir/destinations/?q=&limit=` | Pencarian kota, kecamatan, kelurahan, atau kode pos via RajaOngkir | Pengguna login |
+| GET / POST / PUT / PATCH | `/api/lembaga/profile/` | Mengambil atau menyimpan profil lembaga mitra beserta statistik donasi | Akun lembaga |
+| GET | `/api/lembaga/?type=&verified=&city=&q=` | Direktori publik lembaga mitra dengan filter jenis, status verifikasi, kota, dan pencarian | Semua |
+| GET | `/api/lembaga/<id>/` | Detail publik satu lembaga mitra | Semua |
+| POST | `/api/security/password/` | Mengubah atau mengatur kata sandi akun | Pengguna login |
+| POST | `/api/security/google/disconnect/` | Memutuskan tautan akun Google dari profil | Pengguna login |
+| POST | `/api/security/delete-account/` | Menghapus akun pengguna secara permanen | Pengguna login |
 
 ### Marketplace dan Transaksi (Ira)
 *Menyusul.*
