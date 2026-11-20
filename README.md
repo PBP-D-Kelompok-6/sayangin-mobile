@@ -73,7 +73,15 @@ Alamat dasar: `https://muhammad-ghazi51-sayang-in.pws.cs.ui.ac.id`
 *Menyusul.*
 
 ### Marketplace dan Transaksi (Ira)
-*Menyusul.*
+| Method | Endpoint | Fungsi | Akses |
+|:---|:---|:---|:---|
+| GET | `/marketplace/api/katalog/?q=&kategori=&kondisi=&ukuran=&lokasi=&penjual=&min=&maks=&urut=terbaru\|termurah\|termahal` | Daftar barang tersedia dengan pencarian, filter, dan urutan yang sama dengan web, plus pilihan kategori dan kondisi | Semua |
+| GET | `/marketplace/api/katalog/<id>/` | Detail barang: foto, kondisi, ukuran, deskripsi, dan status sudah di keranjang | Semua (draf hanya penjualnya) |
+| GET | `/marketplace/api/keranjang/` | Isi keranjang dikelompokkan per penjual, beserta jumlah dan subtotal | Akun personal |
+| POST | `/marketplace/api/keranjang/` | Menambah barang ke keranjang (`product=<id>`) | Akun personal (bukan barang sendiri) |
+| DELETE | `/marketplace/api/keranjang/<id barang>/` | Menghapus barang dari keranjang | Akun personal |
+| GET | `/marketplace/api/pesanan/` | Riwayat pembelian, terbaru dulu | Akun personal |
+| GET | `/marketplace/api/pesanan/<id>/` | Detail pesanan: barang, alamat, kurir, total, dan langkah pelacakan | Pembeli atau penjual pesanan |
 
 ### Lemari Digital (Daffa)
 *Menyusul.*
