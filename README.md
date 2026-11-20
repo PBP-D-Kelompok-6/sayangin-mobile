@@ -79,4 +79,31 @@ Alamat dasar: `https://muhammad-ghazi51-sayang-in.pws.cs.ui.ac.id`
 *Menyusul.*
 
 ### Donasi Tepat Sasaran (Zaki)
-*Menyusul.*
+#### 1. Kebutuhan Donasi
+
+| HTTP Method | Endpoint | Fungsi | Hak Akses |
+| :--- | :--- | :--- | :--- |
+| GET | `/donasi/api/v1/kebutuhan/` | Menampilkan daftar kebutuhan donasi aktif. Mendukung filter pencarian `?q=` dan filter `?kategori=`. | Publik / Semua Pengguna |
+| POST | `/donasi/api/v1/kebutuhan/` | Membuat kebutuhan donasi baru. | Khusus Lembaga Mitra |
+| GET | `/donasi/api/v1/kebutuhan/<int:pk>/` | Melihat detail satu kebutuhan donasi. | Publik / Semua Pengguna |
+| PUT / PATCH | `/donasi/api/v1/kebutuhan/<int:pk>/` | Memperbarui data kebutuhan donasi. | Khusus Lembaga pemilik kebutuhan |
+| DELETE | `/donasi/api/v1/kebutuhan/<int:pk>/` | Menghapus kebutuhan donasi. | Khusus Lembaga pemilik kebutuhan |
+| GET | `/donasi/api/v1/kebutuhan/saya/` | Menampilkan daftar kebutuhan milik lembaga yang sedang login (termasuk draf/selesai). | Khusus Lembaga Mitra |
+
+#### 2. Penawaran Donasi
+
+| HTTP Method | Endpoint | Fungsi | Hak Akses |
+| :--- | :--- | :--- | :--- |
+| GET | `/donasi/api/v1/penawaran/` | Menampilkan daftar tawaran. Jika akun Donatur: riwayat donasi saya. Jika akun Lembaga: daftar tawaran donasi yang masuk. | Pengguna Terautentikasi |
+| POST | `/donasi/api/v1/penawaran/` | Mengirim tawaran donasi baru (bisa mengaitkan `kebutuhan_id` dan `lemari_id`). | Khusus Donatur (Personal) |
+| GET | `/donasi/api/v1/penawaran/<int:pk>/` | Melihat detail satu tawaran donasi. | Donatur pemilik atau Lembaga penerima |
+| POST | `/donasi/api/v1/penawaran/<int:pk>/batal/` | Membatalkan tawaran yang masih berstatus menunggu. | Donatur pemilik tawaran |
+| POST | `/donasi/api/v1/penawaran/<int:pk>/terima/` | Menerima tawaran donasi masuk. | Lembaga penerima tawaran |
+| POST | `/donasi/api/v1/penawaran/<int:pk>/tolak/` | Menolak tawaran donasi masuk. | Lembaga penerima tawaran |
+| POST | `/donasi/api/v1/penawaran/<int:pk>/selesai/` | Menandai barang telah diterima fisik oleh lembaga (menambah counter terpenuhi pada kebutuhan). | Lembaga penerima tawaran |
+
+#### 3. Dashboard Lembaga 
+
+| HTTP Method | Endpoint | Fungsi | Hak Akses |
+| :--- | :--- | :--- | :--- |
+| GET | `/donasi/api/v1/lembaga/dashboard/` | Ringkasan statistik (jumlah tawaran menunggu, kebutuhan aktif, barang diterima bulan ini). | Khusus Lembaga Mitra |
